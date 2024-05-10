@@ -36,25 +36,20 @@ class Veff:
     @property
     def Eu(self):
         #Calculate the unstable effective energy, which is the local maxima of Veff_values, then E_eff = E^2/2 so E = sqrt(2*E_eff)
-        if self.L > (12**(1/2)):
+        if self.L > (12**(1/2)) or self.L ==(12**(1/2)):
             if not self._Eu:
                 diff_Veff = np.diff(self._Veff_values[:, 1])
                 max_indices = np.where((np.sign(diff_Veff[:-1]) > 0) & (np.sign(diff_Veff[1:]) < 0))[0] + 1
                 max_Veff = self._Veff_values[max_indices, 1][0]
                 self._Eu = (2 * max_Veff) ** (1/2)
         else:
-            if not self._Eu:
-                veff_values = self.Veff_values[:, 1]
-                second_derivative = np.diff(np.diff(veff_values))
-                max_indices = np.where(second_derivative < 0)[0] + 1  # Add 1 to get the correct index
-                max_Veff = veff_values[max_indices][0]  # Take the first maximum found
-                self._Eu = (2 * max_Veff) ** 0.5
+            self._Eu = self.Es
         return self._Eu
 
     @property
     def Es(self):
         #Calculate the stable effective energy, which the local minima of Veff_values, then E_eff = E^2/2 so E = sqrt(2*E_eff)
-        if self.L > (12**(1/2)):
+        if self.L > (12**(1/2)) or self.L == (12**(1/2)):
             if not self._Es:
                 diff_Veff = np.diff(self._Veff_values[:, 1])
                 min_indices = np.where((np.sign(diff_Veff[:-1]) < 0) & (np.sign(diff_Veff[1:]) > 0))[0] + 1
@@ -64,9 +59,9 @@ class Veff:
             if not self._Es:
                 veff_values = self.Veff_values[:, 1]
                 second_derivative = np.diff(np.diff(veff_values))
-                mix_indices = np.where(second_derivative > 0)[0] + 1  # Add 1 to get the correct index
-                mix_Veff = veff_values[mix_indices][0]  # Take the first maximum found
-                self._Es = (2 * mix_Veff) ** 0.5
+                min_indices = np.where(second_derivative > 0)[0] + 1  # Add 1 to get the correct index
+                min_Veff = veff_values[min_indices][0]  # Take the first maximum found
+                self._Es = (2 * min_Veff) ** 0.5
         return self._Es
 
     def calc_turning_points(self, E):
