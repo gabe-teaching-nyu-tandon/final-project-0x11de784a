@@ -94,3 +94,16 @@ def test_roots_lower_L(veff_low):
     assert 2 == len(veff_low.calc_turning_points(Eu))
     assert 0 == len(veff_low.calc_turning_points(1))
     
+
+#now test for L < sqrt(12)
+@pytest.fixture
+def veff_3():
+    veff_3 = Veff(3.4)
+    veff_3.Veff_values
+    return veff_3
+
+def test_veff_3_E_setters(veff_3):
+    Eu = veff_3.Eu
+    Es = veff_3.Es
+    assert Eu is not None
+    assert Es is not None
