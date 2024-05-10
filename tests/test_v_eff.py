@@ -31,6 +31,7 @@ def test_veff_Es_setter(veff_set):
     assert Es == pytest.approx((2*0.47)**(1/2), abs = 0.01) #should be around 0.97 
 
 #def test_Veff_values(veff_set):
+#thousands of data values in Veff_values, not sure how to test
 
 #test E such that Eu < E < 1, for expected values
 def test_veff_calc_turning_points(veff_set):
@@ -39,7 +40,7 @@ def test_veff_calc_turning_points(veff_set):
     turning_points = veff_set.calc_turning_points(E)
     assert np.allclose(turning_points, expected_tp)
 
-#test calc_turning_points for correct number of roots for different scenarios
+#test calc_turning_points for correct number of roots for different scenarios of E
 def test_correct_number_roots(veff_set):
     Eu = veff_set.Eu
     Es = veff_set.Es
@@ -65,3 +66,15 @@ def test_correct_number_roots(veff_set):
 
     #one root for E < Es
     assert 1 == len(veff_set.calc_turning_points(0.8))
+
+#testing for different values of L = 4.5, E=1
+def test_E_is_1_root(veff_set):
+    expected = [2.7432530856, 7.3817469144]
+    turning_points = veff_set.calc_turning_points(1)
+    assert np.allclose(turning_points, expected)
+    
+    
+
+
+    
+    

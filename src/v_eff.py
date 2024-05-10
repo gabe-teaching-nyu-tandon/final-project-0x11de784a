@@ -57,7 +57,7 @@ class Veff:
             return (E**2)/2 - 0.5 + (1/r) - (self.L**2)/(2*r**2) + (self.L**2)/(r**3)
         
         roots = []
-        initial_guesses = np.linspace(0.1, 10**4, 2**8)
+        initial_guesses = np.linspace(0.1, 10**4, 2**10)
         
         for guess in initial_guesses:
            root = round(fsolve(equation_to_solve, guess)[0], 10)
