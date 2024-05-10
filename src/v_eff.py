@@ -53,6 +53,9 @@ class Veff:
         return self._Es
 
     def calc_turning_points(self, E):
+        if self.L < 4 and (E == 1 or E>1):
+          return []
+        
         def equation_to_solve(r):
             return (E**2)/2 - 0.5 + (1/r) - (self.L**2)/(2*r**2) + (self.L**2)/(r**3)
         

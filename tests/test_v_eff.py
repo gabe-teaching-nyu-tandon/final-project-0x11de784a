@@ -73,8 +73,24 @@ def test_E_is_1_root(veff_set):
     turning_points = veff_set.calc_turning_points(1)
     assert np.allclose(turning_points, expected)
     
-    
+#have tested for L > 4, now lets test roots for L < 4
+@pytest.fixture
+def veff_low():
+    veff_low = Veff(3.9)
+    veff_low.Veff_values
+    return veff_low
 
+def test_Eu_lower_L(veff_low):
+    Eu = veff_low.Eu
+    assert Eu < 1
 
-    
+def test_roots_lower_L(veff_low):
+    Eu = veff_low.Eu
+    Es = veff_low.Es
+    expected = [3.48885, 5.28784, 41.2211]
+    turning_points = veff_low.calc_turning_points(0.979795)
+    assert np.allclose(turning_points, expected)
+    assert 3 == len(veff_low.calc_turning_points(Es))
+    assert 2 == len(veff_low.calc_turning_points(Eu))
+    assert 0 == len(veff_low.calc_turning_points(1))
     
