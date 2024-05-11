@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from src.v_eff import Veff
+from src.v_eff_factory import VeffFactory
 
 def test_import():
     pass
@@ -35,8 +36,8 @@ def test_veff_Es_setter(veff_set):
 #def test_Veff_values(veff_set):
 #thousands of data values in Veff_values, not sure how to test
 
-def test_Veff_at_r(veff):
-    veff_r = veff.calc_Veff_at_r(3)
+def test_veff_at_r(veff):
+    veff_r = veff.calc_veff_at_r(3)
     assert np.isclose(veff_r, 0.541667)
 
 #test E such that Es < E < 1, for expected values
@@ -115,3 +116,31 @@ def test_veff_3_E_setters(veff_3):
     assert Eu is not None
     assert Es is not None
 
+#test REGISTRY of E : [r_values] inside Veff(L)
+def test_registry_E_r(veff_set):
+    r_vals1 = veff_set.calc_turning_points(0.98)
+    r_vals2 = veff_set.calc_turning_points(1)
+    r_from_registry = veff_set.REGISTRY.get(0.98)
+    assert r_vals1 == r_from_registry
+    assert 2 == len(veff_set.REGISTRY)
+
+def test_different_registries(veff_set, veff_low):
+    r_vals1 = veff_set.calc_turning_points(1)
+    r_vals2 = veff_low.calc_turning_points(1)
+    assert veff_set.REGISTRY.get(1) != veff_low.REGISTRY.get(1)
+
+
+#############################################################
+
+#Ltes now test VeffFactory class
+@pytest.fixture
+def factory():
+    return VeffFactory()
+
+def test_vefffactory_instance(factory):
+    veff = factory.create(L=4.3)
+    assert isinstance(veff, Veff)
+
+def test_vefffactory_registry(factory):
+    veff = factory.create(L=4.2)
+    assert factory.REGISTRY.get(4.2) == veff
