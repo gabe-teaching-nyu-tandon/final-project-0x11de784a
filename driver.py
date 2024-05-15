@@ -1,10 +1,15 @@
 import sys
 import yaml
 import numpy as np
+
 from src.v_eff_factory import VeffFactory
 from src.v_eff import Veff
+
 from src.orbit_factory import OrbitFactory
 from src.orbit import Orbit
+
+from src.viz import Visualization
+from src.viz import VeffPlot
 
 def read_params(yaml_file: str) -> dict:
     with open(yaml_file, 'r') as f:
@@ -26,21 +31,29 @@ def create_orbit(params: dict) -> Orbit:
     E = params["E"]
     C = params["C"]
 
-    orbit_ = OrbitFactory()
-    orbit_ = orbit_.create_orbit(L, E, C)
-    return orbit_
+    orbit = OrbitFactory()
+    orbit = orbit.create_orbit(L, E, C)
+    return orbit
 
 def calc_trajectory(orbit: Orbit):
     pass
 
 def visualize(orbit: Orbit, trajectory, veff: Veff):
-    pass
+    # veff plot
+    data = veff.Veff_values
+    veff_plot = VeffPlot(data)
+    plot = veff_plot.create_plot()
+    return plot
+
+    # trajectory plot -> not yet defined
+
 
 def main(yaml_params: dict) -> None:
     
-    create_veff(parameters)
-    create_orbit(parameters)
-
+    veff = create_veff(parameters)
+    orbit =create_orbit(parameters)
+    trajectory = calc_trajectory(orbit)
+    visualize(orbit, trajectory, veff)
 
 
 
@@ -55,5 +68,7 @@ if __name__ == "__main__":
         parameters = {"L":sys.argv[1], "E":sys.argv[2], "C":sys.argv[3]}
         main(parameters)
 
-    else:
+    else: 
         print(f"Failed to read YAML file takes filename or (L,E,C)")
+
+
