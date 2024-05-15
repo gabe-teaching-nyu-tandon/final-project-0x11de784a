@@ -47,9 +47,9 @@ class Veff:
         if self.L > (12**(1/2)) or self.L ==(12**(1/2)): #Is L above L_{ISCO}
             if not self._Eu:
                 #calculate where the derivative of Veff is changing sign from + to -, local maxima
-                diff_Veff = np.diff(self._Veff_values[:, 1])
+                diff_Veff = np.diff(self.Veff_values[:, 1])
                 max_indices = np.where((np.sign(diff_Veff[:-1]) > 0) & (np.sign(diff_Veff[1:]) < 0))[0] + 1
-                max_Veff = self._Veff_values[max_indices, 1][0]
+                max_Veff = self.Veff_values[max_indices, 1][0]
                 self._Eu = (2 * max_Veff) ** (1/2)
         elif self.L < (12**(1/2)): #If L below L_{ISCO}, then Eu = Es
             self._Eu = self.Es
@@ -61,9 +61,9 @@ class Veff:
         if self.L > (12**(1/2)) or self.L == (12**(1/2)): #Is L above L_{ISCO}
             if not self._Es:
                 #calculate where the derivative of Veff is changing sign from - to +, local minima
-                diff_Veff = np.diff(self._Veff_values[:, 1])
+                diff_Veff = np.diff(self.Veff_values[:, 1])
                 min_indices = np.where((np.sign(diff_Veff[:-1]) < 0) & (np.sign(diff_Veff[1:]) > 0))[0] + 1
-                min_Veff = self._Veff_values[min_indices, 1][0]
+                min_Veff = self.Veff_values[min_indices, 1][0]
                 self._Es = (2 * min_Veff) ** (1/2)
         elif self.L < (12**(1/2)): #If L below L_{ISCO}
             if not self._Es:
