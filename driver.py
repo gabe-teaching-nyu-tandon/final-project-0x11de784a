@@ -65,7 +65,7 @@ if __name__ == "__main__":
 
     elif len(sys.argv) == 4:
         #manually transform into dict
-        parameters = {"L":sys.argv[1], "E":sys.argv[2], "C":sys.argv[3]}
+        parameters = {"L":float(sys.argv[1]), "E":float(sys.argv[2]), "C":float(sys.argv[3])}
         main(parameters)
 
     else: 
