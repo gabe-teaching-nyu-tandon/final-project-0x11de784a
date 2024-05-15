@@ -2,8 +2,8 @@
 import pytest
 import yaml
 
-from src.orbit import orbit
-from src.v_eff import v_eff
+from src.orbit import Orbit
+from src.v_eff import Veff
 import driver
 
 
@@ -12,7 +12,7 @@ import driver
 # test YAML data as a string
 yaml_data = """
 L: 4.5
-E: .0979795
+E: 0.979795
 C: 4
 """
 
@@ -29,16 +29,16 @@ def test_model_name():
     assert isinstance(processed_data, dict)
 
     assert processed_data['L'] == 4.5, "L doesnt match"
-    assert processed_data['E'] == 0.0979795, "E doesnt match"
+    assert processed_data['E'] == 0.979795, "E doesnt match"
 
 
 # testing driver code functions
 
 def test_orbit(loaded_yaml_data):
     o = driver.create_orbit(loaded_yaml_data)
-    assert isinstance(o, orbit) 
+    assert isinstance(o, Orbit) 
     
 def test_veff(loaded_yaml_data):
     veff = driver.create_veff(loaded_yaml_data)
-    assert isinstance(veff, v_eff)
+    assert isinstance(veff, Veff)
 
