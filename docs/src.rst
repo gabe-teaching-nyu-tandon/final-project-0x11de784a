@@ -20,14 +20,6 @@ src.orbit\_factory module
    :undoc-members:
    :show-inheritance:
 
-src.orbit\_sampler module
--------------------------
-
-.. automodule:: src.orbit_sampler
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 src.trajectory module
 ---------------------
 
