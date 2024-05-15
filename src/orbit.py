@@ -1,4 +1,4 @@
-from v_eff import Veff
+from src.v_eff import Veff
 
 
 class Orbit():
