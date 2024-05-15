@@ -13,9 +13,7 @@ classDiagram
         dict REGISTRY
         create(L) Veff
     }
-%% End of Veff classes
 
-%%These are classes that make the Orbit objects
     OrbitFactory --> Orbit 
     class Orbit{
         +float L
@@ -32,7 +30,7 @@ classDiagram
         create(L, E, rmin, rmax, Veff) Orbit
     } 
 
-%% These classes calculate Trajectory using ODEs
+
     class TrajectoryFactory{
         + create(Orbit) ContinuousTrajectory
     }
@@ -62,7 +60,7 @@ classDiagram
         + expand(SampleTrajectory) 
     }
 
-%%These are the classes with ODEs
+
     OrbitSampler <|-- PeriodicOrbitSampler
     class OrbitSampler{
         +Orbit Orbit
@@ -72,7 +70,7 @@ classDiagram
         + rhs() ndarray
     } 
 
-%%These are the vix classes
+
     Visualize <|-- TrajectoryPlot
     Visualize <|-- VeffPlot
     class Visualize{
