@@ -184,11 +184,18 @@ While working on the $V_{eff}$ class the main challenges came during calculating
 \subsection{Orbit Class}
 The main challenge of creating the Orbit objects was the implementation of the factory. There are 4 different categoeries of orbits and we are only focusign on category 4 for the scope of this project. To create an orbit object we need to retrieve turining points from the Veff class, and then utilize the type 4 category to claim an $r_{min}$ and an $r_{max}$ depending on the number of turning points recieved form Veff.
 
-%finish
+\subsection{Trajectory Class}
+Main challenges were understanding the theoretical background behind the calculations of the trajectory and then applying the correct scipy library methods for implementation.
+
+\subsection{Visualizer Class}
+A challenge for the vizualizer plot is understanding the correct scales needed to plot the data. The r values for the Veff plot need to be in log scale to get the expected image.
+
+\subsection{Driver Code}
+The formating and mapping out of the relationships between the diffrent classes was the main challenge of this code section. Making sure that the correct parameters are used in the creation of the objects and separating the jobs accordingly.
 
 \section{Hopes for Further Improvement}
 
-Further improvements wound be to including an implementation for categories 1, 2, and 3 in the OrbitFactory class. Currently we do not have an algorithm for calculating orbits that have radius that plummets to 0 or towards infinity.
-%do this
+Further improvements wound be to including an implementation for categories 1, 2, and 3 in the OrbitFactory class. Currently we do not have an algorithm for calculating orbits that have radius that plummets to 0 or towards infinity.\\
+Another hope is to add more functionality to the vizualizer, adding animations.
 
 \end{document}
