@@ -6,17 +6,16 @@ class VeffFactory:
 
     Attributes:
         REGISTRY (dict): A dictionary to store instances of Veff for different L values.
-
-    Methods:
-        create(L: float) -> Veff:
-            Creates and returns an instance of the Veff class for the given angular momentum L.
-            If an instance for the given L already exists, returns the existing object.
     """
 
     def __init__(self):
         self.REGISTRY = {}  # Registry to store Veff objects for different L values
 
     def create(self, L: float) -> Veff:
+        '''
+        Creates and returns an instance of the Veff class for the given angular momentum L.
+        If an instance for the given L already exists, returns the existing object.
+        '''
         # Check if a Veff instance for the given L already exists in the registry
         if L in self.REGISTRY:
             return self.REGISTRY[L]

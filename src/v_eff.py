@@ -8,12 +8,7 @@ class Veff:
 
     Attributes:
         L (float): The angular momentum of the orbit.
-
-    Properties:
-        Veff_values (ndarray[(r, Veff)]): An array of Veff values calculated for a range of r values.
-        Eu (float): Unstable energy. The energy at the peak of the effective potential.
-        Es (float): Stable energy. The energy at the saddle point of the effective potential.
-
+      
     Methods:
         calc_Veff_at_r(r: float) -> float
             Calculates the Veff value at a single r value.
@@ -34,6 +29,9 @@ class Veff:
 
     @property
     def Veff_values(self):
+        '''
+        Veff_values (ndarray[(r, Veff)]): An array of Veff values calculated for a range of r values.
+        '''
         #Calculate Veff_values for a set range of radius using the effective potential equation.
         if not isinstance(self._Veff_values, np.ndarray):
             r_values = np.linspace(0.1, 10**4, 2**20)  # Example range of r values
@@ -43,6 +41,10 @@ class Veff:
 
     @property
     def Eu(self):
+        '''
+        Eu (float): Unstable energy. The energy at the peak of the effective potential.
+        '''
+        
         #Calculate the unstable effective energy, which is the local maxima of Veff_values, then E_eff = E^2/2 so E = sqrt(2*E_eff)
         if self.L > (12**(1/2)) or self.L ==(12**(1/2)): #Is L above L_{ISCO}
             if not self._Eu:
@@ -57,6 +59,10 @@ class Veff:
 
     @property
     def Es(self):
+        '''
+         Es (float): Stable energy. The energy at the saddle point of the effective potential.
+        '''
+        
         #Calculate the stable effective energy, which the local minima of Veff_values, then E_eff = E^2/2 so E = sqrt(2*E_eff)
         if self.L > (12**(1/2)) or self.L == (12**(1/2)): #Is L above L_{ISCO}
             if not self._Es:
@@ -79,13 +85,18 @@ class Veff:
                     self._Es = None        
         return self._Es
     
-    #calculate Veff at any given r
     def calc_veff_at_r(self, r: float) -> float:
+        '''
+        Calculate Veff at any given r value
+        '''
         return 0.5 - (1 / r) + ((self.L ** 2) / (2*r**2)) - ((self.L**2) / (r**3))
 
     
     #find the intersection points between the Veff values and the Eeff value. 
     def calc_turning_points(self, E: float) -> List[float]:
+        '''
+        Find the intersection points between the Veff values and the Eeff value. 
+        '''
         Eu = self.Eu
         Es = self.Es
 

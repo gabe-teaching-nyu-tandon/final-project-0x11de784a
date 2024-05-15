@@ -7,9 +7,13 @@ class Orbit():
 
     Attributes:
     L (float): Angular momentum of the orbiting body.
+    
     E (float): Energy of the orbiting body.
+    
     rmin (float): Minimum radius of the orbit.
+    
     rmax (float): Maximum radius of the orbit.
+    
     Veff (Veff): Effective potential function for the orbit.
     '''
 
