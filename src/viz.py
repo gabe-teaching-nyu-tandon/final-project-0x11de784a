@@ -34,3 +34,5 @@ class VeffPlot(Visualization):
         plt.xscale('log')
         plt.grid(True)
         plt.show()
+
+        return self
