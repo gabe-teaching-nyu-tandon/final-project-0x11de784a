@@ -30,9 +30,11 @@ def create_orbit(params: dict) -> Orbit:
     orbit_ = orbit_.create_orbit(L, E, C)
     return orbit_
 
-def calc_tra(orbit: Orbit):
+def calc_trajectory(orbit: Orbit):
     pass
 
+def visualize(orbit: Orbit, trajectory, veff: Veff):
+    pass
 
 def main(yaml_params: dict) -> None:
     
