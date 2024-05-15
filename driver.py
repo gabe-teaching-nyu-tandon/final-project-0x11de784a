@@ -8,7 +8,7 @@ from src.v_eff import Veff
 from src.orbit_factory import OrbitFactory
 from src.orbit import Orbit
 
-from src.viz import Visualization
+from src.viz import Visualizer
 from src.viz import VeffPlot
 
 def read_params(yaml_file: str) -> dict:
@@ -38,12 +38,11 @@ def create_orbit(params: dict) -> Orbit:
 def calc_trajectory(orbit: Orbit):
     pass
 
-def visualize(orbit: Orbit, trajectory, veff: Veff):
+def visualize(orbit: Orbit, trajectory, veff: Veff, params: dict):
     # veff plot
     data = veff.Veff_values
-    veff_plot = VeffPlot(data)
-    plot = veff_plot.create_plot()
-    return plot
+
+    Visualizer(veff_data=data, E_value=params["E"])
 
     # trajectory plot -> not yet defined
 
@@ -53,7 +52,7 @@ def main(yaml_params: dict) -> None:
     veff = create_veff(parameters)
     orbit =create_orbit(parameters)
     trajectory = calc_trajectory(orbit)
-    visualize(orbit, trajectory, veff)
+    visualize(orbit, trajectory, veff, parameters)
 
 
 
