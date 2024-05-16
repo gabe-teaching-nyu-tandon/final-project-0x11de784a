@@ -42,9 +42,10 @@ def visualize(orbit: Orbit, trajectory, veff: Veff, params: dict):
     # veff plot
     data = veff.Veff_values
 
-    Visualizer(veff_data=data, E_value=params["E"])
+    vis = Visualizer(veff_data=data, E_value=params["E"])
 
     # trajectory plot -> not yet defined
+    return vis
 
 
 def main(yaml_params: dict) -> None:
