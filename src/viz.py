@@ -52,7 +52,11 @@ class GUI():
 
 
 class Visualizer:
-    def __init__(self, veff_data, E_value):
+    def __init__(self, veff_data, E_value, test):
+
+        if test:
+            return
+
         self.root = tk.Tk()
         self.root.title("0x11de784a")
 
