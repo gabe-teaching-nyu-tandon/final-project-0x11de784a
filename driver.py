@@ -42,7 +42,7 @@ def visualize(orbit: Orbit, trajectory, veff: Veff, params: dict, in_pytest):
     # veff plot
     data = veff.Veff_values
 
-    vis = Visualizer(veff_data=data, E_value=params["E"], test=in_pytest)
+    vis = Visualizer(veff_data=data, parameters=params, test=in_pytest)
 
     # trajectory plot -> not yet defined
     return vis
@@ -53,7 +53,7 @@ def main(yaml_params: dict) -> None:
     veff = create_veff(parameters)
     orbit =create_orbit(parameters)
     trajectory = calc_trajectory(orbit)
-    visualize(orbit, trajectory, veff, parameters)
+    visualize(orbit, trajectory, veff, parameters, False)
 
 
 

@@ -5,8 +5,6 @@ from matplotlib.figure import Figure
 from src.v_eff_factory import VeffFactory
 from src.v_eff import Veff
 
-filename = "mock_yml.yml"
-
 class GUI():
 
     def __init__(self):
@@ -52,10 +50,14 @@ class GUI():
 
 
 class Visualizer:
-    def __init__(self, veff_data, E_value, test):
+    def __init__(self, veff_data, parameters, test):
 
         if test:
             return
+        
+        L_Value = parameters["L"]
+        E_value = parameters["E"]
+        C_value = parameters["C"]
 
         self.root = tk.Tk()
         self.root.title("0x11de784a")
@@ -75,27 +77,30 @@ class Visualizer:
         self.input_frame = tk.Frame(self.root)
         self.input_frame.pack(padx=10, pady=10)
 
-        # Orbital Category Input
-        self.category_label = tk.Label(self.input_frame, text="Orbit Category:", font=('Arial', 12))
-        self.category_label.pack(side=tk.LEFT, padx=5)
+       # Orbital Category Input
+        category_label = tk.Label(self.input_frame, text="Orbit Category:", font=('Arial', 12))
+        category_label.pack(side=tk.LEFT, padx=5)
 
         self.C_entry = tk.Entry(self.input_frame, font=('Arial', 16))
+        self.C_entry.insert(0, C_value)  # Initialize with value "3"
         self.C_entry.bind("<KeyPress>", self.C_input_handler)
         self.C_entry.pack(side=tk.LEFT, padx=5)
 
         # Angular Momentum Input
-        self.AngularMomentum_label = tk.Label(self.input_frame, text="L:", font=('Arial', 12))
-        self.AngularMomentum_label.pack(side=tk.LEFT, padx=5)
+        angular_momentum_label = tk.Label(self.input_frame, text="L:", font=('Arial', 12))
+        angular_momentum_label.pack(side=tk.LEFT, padx=5)
 
         self.L_entry = tk.Entry(self.input_frame, font=('Arial', 16))
+        self.L_entry.insert(0, L_Value)  # Initialize with value "2"
         self.L_entry.bind("<KeyPress>", self.L_input_handler)
         self.L_entry.pack(side=tk.LEFT, padx=5)
 
         # Energy Input
-        self.Energy_label = tk.Label(self.input_frame, text="E:", font=('Arial', 12))
-        self.Energy_label.pack(side=tk.LEFT, padx=5)
+        energy_label = tk.Label(self.input_frame, text="E:", font=('Arial', 12))
+        energy_label.pack(side=tk.LEFT, padx=5)
 
         self.E_entry = tk.Entry(self.input_frame, font=('Arial', 16))
+        self.E_entry.insert(0, E_value)  # Initialize with value "1"
         self.E_entry.bind("<KeyPress>", self.E_input_handler)
         self.E_entry.pack(side=tk.LEFT, padx=5)
 
