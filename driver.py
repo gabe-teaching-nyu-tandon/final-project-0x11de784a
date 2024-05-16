@@ -38,11 +38,11 @@ def create_orbit(params: dict) -> Orbit:
 def calc_trajectory(orbit: Orbit):
     pass
 
-def visualize(orbit: Orbit, trajectory, veff: Veff, params: dict):
+def visualize(orbit: Orbit, trajectory, veff: Veff, params: dict, in_pytest):
     # veff plot
     data = veff.Veff_values
 
-    vis = Visualizer(veff_data=data, E_value=params["E"])
+    vis = Visualizer(veff_data=data, E_value=params["E"], test=in_pytest)
 
     # trajectory plot -> not yet defined
     return vis
