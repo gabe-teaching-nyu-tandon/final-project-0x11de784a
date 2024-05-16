@@ -47,7 +47,7 @@ def test_veff_create(loaded_yaml_data):
 
 def test_visualize_veff(loaded_yaml_data):
     veff = driver.create_veff(loaded_yaml_data)
-    veff_viz = driver.visualize(driver.create_orbit(loaded_yaml_data), None, veff)
+    veff_viz = driver.visualize(driver.create_orbit(loaded_yaml_data), None, veff, loaded_yaml_data, True)
 
     assert isinstance(veff_viz, Visualizer)
 
