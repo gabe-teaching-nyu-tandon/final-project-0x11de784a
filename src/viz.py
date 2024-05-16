@@ -100,21 +100,30 @@ class Visualizer:
     def C_input_handler(self, event):
         valid_keys = ['1', '2', '3', '4', '\b', '\r']  # backspace and enter
         if event.char in valid_keys:
-            return
+            if event.char == '\r':
+                return
         else:
             return "break"  # ignore the key press
     
     def L_input_handler(self, event):
-        if event.char == '\r':
-            veff_new = VeffFactory().create(float(self.L_entry.get()))
-            self.Veff_plot.update_plot(veff_new.Veff_values)
-            print("updated Veff Plot")
+        valid_keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '\r', '\b']
+        if event.char in valid_keys:
+            if event.char == '\r':
+                veff_new = VeffFactory().create(float(self.L_entry.get()))
+                self.Veff_plot.update_plot(veff_new.Veff_values)
+                print("updated Veff Plot")
+        else:
+            return "break"  # ignore the key press
 
     def E_input_handler(self, event):
-        if event.char == '\r':
-            E_value = float(float(self.E_entry.get()))
-            self.Veff_plot.update_E_line(E_value)
-            print("updated E line")
+        valid_keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '\r', '\b']
+        if event.char in valid_keys:
+            if event.char == '\r':
+                E_value = float(float(self.E_entry.get()))
+                self.Veff_plot.update_E_line(E_value)
+                print("updated E line")
+        else:
+            return "break"  # ignore the key press
 
 class VeffPlot:
     def __init__(self, master, data, E_value):
@@ -136,7 +145,7 @@ class VeffPlot:
         self.ax.legend()
         self.ax.set_xscale('log')
         self.ax.grid(True)
-        self.ax.axhline(y=self.E_value, color='r', linestyle='--', label='E Value')  # draw E line
+        self.ax.axhline(y=0.5*(self.E_value**2), color='r', linestyle='--', label='E Value')  # draw E line
 
     def update_plot(self, new_data):
         self.ax.clear()
