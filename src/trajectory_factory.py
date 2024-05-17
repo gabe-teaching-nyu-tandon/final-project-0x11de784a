@@ -1,5 +1,6 @@
 import scipy
 import math
+import src.trajectory
 class TrajectoryFactory:
 
 	@staticmethod
@@ -30,10 +31,12 @@ class TrajectoryFactory:
     		return (dr_dtau, du_dtau, dphi_dtau)
 
 	@staticmethod
-	def interpolant(rmin,L,E) -> scipy.integrate.OdeSolution: 
-		rad_period = TrajectoryFactory.prop_radial_period(r_list,E)
+	def interpolant(rmin,L,E,rad_period) -> scipy.integrate.OdeSolution: # constructs periodic interpolant of r and phi
 		sol = scipy.solve_ivp(TrajectoryFactory.schwartzchild_odes,(0,rad_period),(rmin,L**2 / rmin**2,0),dense_output=True)
 		return sol.sol
 
-	def __call__(orbit):
-		
+	def __call__(self,orbit) -> src.trajectory.ContinuousTrajectory: # constructs Continuous Trajectory object upon call to class
+		rad_period = TrajectoryFactory.prop_radial_period(orbit.Veff.REGISTRY[orbit.E],orbit.E)
+		ang_period = TrajectoryFactory.prop_angular_period(orbit.Veff.REGISTRY[orbit.E],orbit.L,orbit.E)
+		int = TrajectoryFactory.interpolant(orbit.Veff.REGISTRY[orbit.E][1],orbit.L,orbit.E,rad_period)
+		return src.trajectory.ContinuousTrajector(rad_period,ang_period,interpolant)
