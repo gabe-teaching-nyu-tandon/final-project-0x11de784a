@@ -39,4 +39,4 @@ class TrajectoryFactory:
 		rad_period = TrajectoryFactory.prop_radial_period(orbit.Veff.REGISTRY[orbit.E],orbit.E)
 		ang_period = TrajectoryFactory.prop_angular_period(orbit.Veff.REGISTRY[orbit.E],orbit.L,orbit.E)
 		int = TrajectoryFactory.interpolant(orbit.Veff.REGISTRY[orbit.E][1],orbit.L,orbit.E,rad_period)
-		return src.trajectory.ContinuousTrajector(rad_period,ang_period,interpolant)
+		return src.trajectory.ContinuousTrajectory(rad_period,ang_period,interpolant)
