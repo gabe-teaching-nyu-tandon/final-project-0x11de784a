@@ -6,3 +6,7 @@ def test_prop_radial_period():
 
 def test_prop_angular_period():
 	assert isinstance(src.trajectory_factory.TrajectoryFactory.prop_angular_period([1,2,3],-0.5,0.5),float)
+
+def test_interpolate():
+	assert isinstance(src.trajectory_factory.TrajectoryFactory.interpolate([1,2,3],0.5,0.5),scipy.integrate.OdeSolution)
+
